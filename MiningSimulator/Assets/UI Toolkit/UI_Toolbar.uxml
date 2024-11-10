@@ -1,0 +1,8 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/UI_Stylesheet.uss?fileID=7433441132597879392&amp;guid=f63f35bcf4ee7f742828700297879d2a&amp;type=3#UI_Stylesheet" />
+    <engine:VisualElement class="toolbar" style="bottom: auto; left: auto; top: auto; right: auto;">
+        <engine:Button text="Hauptschiff" name="mainShip" />
+        <engine:Button text="Manager" name="manager" />
+        <engine:Button text="Werkstatt" name="workshop" />
+    </engine:VisualElement>
+</engine:UXML>
