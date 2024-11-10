@@ -1,8 +1,11 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using System;
 public class Toolbar_Controller : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    public static event Action OnMainShipButtonClicked;
     public UIDocument uiDocument;
     private Button mainShipButton;
     private Button managerButton;
@@ -15,9 +18,14 @@ public class Toolbar_Controller : MonoBehaviour
         managerButton = root.Q<Button>("manager");
         workshopButton = root.Q<Button>("workshop");
 
-        mainShipButton.clicked += () => OpenView("MainShip");
         managerButton.clicked += () => OpenView("Manager");
         workshopButton.clicked += () => OpenView("Workshop");
+
+        mainShipButton.clicked += () =>
+        {
+            OpenView("MainShip");
+            OnMainShipButtonClicked?.Invoke();
+        };
     }
 
     void OpenView(string viewName)

@@ -12,6 +12,9 @@ public class CameraMovement : MonoBehaviour
 
     void Update()
     {
+        if (MainScreenController.isDraggingMainScreen){
+            return;
+        }
         // Touch-Eingabe
         if (Input.touchCount == 1)
         {

@@ -1,18 +1,56 @@
 VisualElement {}
 
-.toolbar{
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
-    height: 50px;
-    background-color: #222222;
+.root {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
-Button {
-    width: 100px;
-    height: 40px;
+.toolbar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    flex-direction: row;
+}
+
+.toolbar-button {
+    flex-grow: 1;
+    margin: 0;
+    padding: 0;
+    /*border : none  border wird nicht erkannt */
+    background-color: #222222;
     color: white;
     font-size: 14px;
-    margin: 5px;
+    height: 100%;
+}
+
+.main-screen {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0; /* Höhe der Toolbar */
+    height: 0px; /* Initial ausgeblendet */
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.8);
+    flex-direction: column;
+    z-index: 10;
+}
+
+.drag-handle {
+    height: 20px;
+    background-color: grey;
+    align-items: center;
+    justify-content: center;
+}
+
+.drag-indicator {
+    width: 40px;
+    height: 4px;
+    background-color: white;
+    border-radius: 2px;
+    align-self: center;
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<engine:UXML
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:engine="UnityEngine.UIElements"
+    xsi:noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd"
+>
+    <Style src="project://database/Assets/UI Toolkit/UI_Stylesheet.uss" />
+
+    <engine:VisualElement class="root">
+        <engine:VisualElement name="mainScreen" class="main-screen">
+            <!-- Inhalt des Hauptbildschirms -->
+            <engine:VisualElement name="dragHandle" class="drag-handle">
+                <engine:VisualElement class="drag-indicator" />
+            </engine:VisualElement>
+            <!-- Weitere Inhalte des MainScreens -->
+        </engine:VisualElement>
+
+        <engine:VisualElement class="toolbar">
+            <engine:Button text="Hauptschiff" name="mainShip" class="toolbar-button" />
+            <engine:Button text="Manager" name="manager" class="toolbar-button" />
+            <engine:Button text="Werkstatt" name="workshop" class="toolbar-button" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>
