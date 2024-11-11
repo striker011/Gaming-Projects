@@ -3,11 +3,8 @@ using UnityEngine.UIElements;
 
 public class MainScreenController : MonoBehaviour
 {
-    public UIDocument uiDocument;
-    private VisualElement root;
-    private VisualElement mainScreen;
-    private VisualElement dragHandle;
-    private Button mainShipButton;
+    public VisualElement mainScreen;
+    public Button mainShipButton;
 
     private bool isDragging = false;
     private float startMousePositionY;
@@ -17,79 +14,85 @@ public class MainScreenController : MonoBehaviour
 
     void Start()
     {
-        root = uiDocument.rootVisualElement;
-        mainScreen = root.Q<VisualElement>("mainScreen");
-        dragHandle = mainScreen.Q<VisualElement>("dragHandle");
-        mainShipButton = root.Q<Button>("mainShip");
+        // Zugriff auf die UI-Elemente über den UIManager
+        mainScreen = UIManager.mainScreen;
+        mainShipButton = UIManager.mainShipButton;
 
-        // MainScreen initial ausblenden
-        mainScreen.style.height = new StyleLength(0f);
+        if (mainScreen == null || mainShipButton == null )
+        {
+            Debug.LogError("Ein oder mehrere UI-Elemente sind nicht initialisiert.");
+            return;
+        }
 
-        // Event Listener für den Hauptschiff-Button
         mainShipButton.clicked += ShowMainScreen;
 
-        // Event Listener für den Drag Handle
-
+        // Event Listener für den MainScreen (für das Dragging)
         mainScreen.RegisterCallback<PointerDownEvent>(OnPointerDown);
         mainScreen.RegisterCallback<PointerMoveEvent>(OnPointerMove);
         mainScreen.RegisterCallback<PointerUpEvent>(OnPointerUp);
-    }
-    void OnEnable()
-    {
-        Toolbar_Controller.OnMainShipButtonClicked += ShowMainScreen;
-    }
 
-    void OnDisable()
-    {
-        Toolbar_Controller.OnMainShipButtonClicked -= ShowMainScreen;
+        // MainScreen initial ausblenden
+        mainScreen.style.height = new StyleLength(0f);
     }
 
     void ShowMainScreen()
     {
+        // Bringe den mainScreen nach vorne
+        mainScreen.BringToFront();
+
         // Setze die Höhe auf einen Startwert, z.B. 30% der Bildschirmhöhe
         mainScreen.style.height = new StyleLength(new Length(30, LengthUnit.Percent));
+
     }
 
-    void OnPointerUp(PointerUpEvent evt)
+    void HideMainScreen()
+    {
+        // Blende den MainScreen aus
+        mainScreen.style.height = new StyleLength(0f);
+    }
+
+    void OnPointerDown(PointerDownEvent evt)
     {
         isDragging = true;
         isDraggingMainScreen = true;
         startMousePositionY = evt.position.y;
-        startHeight = mainScreen.layout.height;
-        evt.StopPropagation(); // Verhindert, dass andere Elemente das Event erhalten
+        startHeight = mainScreen.resolvedStyle.height;
+        evt.StopPropagation();
     }
 
     void OnPointerMove(PointerMoveEvent evt)
     {
         if (isDragging)
         {
-            float deltaY = evt.position.y - startMousePositionY;
+            // Korrigierte Berechnung von deltaY
+            float deltaY = startMousePositionY - evt.position.y;
+
             float newHeight = startHeight + deltaY;
 
-            // Begrenzungen setzen (z.B. min 0%, max 100%)
-            float minHeight = 0;
-            float maxHeight = root.layout.height - 50; // Abzüglich der Toolbar-Höhe
-
-            newHeight = Mathf.Clamp(newHeight, minHeight, maxHeight);
-
             mainScreen.style.height = new StyleLength(newHeight);
+
+            // Log der Werte
+            Debug.Log($"DeltaY: {deltaY}, New Height: {newHeight}");
 
             evt.StopPropagation();
         }
     }
 
-    void OnPointerDown(PointerDownEvent evt)
+    void OnPointerUp(PointerUpEvent evt)
     {
         isDragging = false;
         isDraggingMainScreen = false;
 
         float currentHeight = mainScreen.resolvedStyle.height;
-         // Überprüfen, ob die Höhe nahe 0 ist
+
+        // Log der finalen Höhe
+        Debug.Log($"Final Height on Pointer Up: {currentHeight}");
+
         if (currentHeight < 50)
         {
-            // MainScreen ausblenden
-            mainScreen.style.height = new StyleLength(0f);
+            HideMainScreen();
         }
+
         evt.StopPropagation();
     }
 }
