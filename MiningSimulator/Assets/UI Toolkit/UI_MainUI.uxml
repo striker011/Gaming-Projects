@@ -1,7 +1,9 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/UI_Stylesheet.uss?fileID=7433441132597879392&amp;guid=f63f35bcf4ee7f742828700297879d2a&amp;type=3#UI_Stylesheet" />
-    <engine:VisualElement class="root">
         <engine:VisualElement name="mainScreen" class="main-screen" />
+        <engine:VisualElement name="debug" class="_debug">
+            <engine:DoubleField label="Debug Cargohold" value="42.2" class="_debug_cargohold" />
+        </engine:VisualElement>
         <engine:VisualElement class="toolbar">
             <engine:Button text="Hauptschiff" name="mainShip" class="toolbar-button" />
             <engine:Button text="Manager" name="manager" class="toolbar-button" />

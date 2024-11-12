@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: da4cca89674ab774fa2cc0b4d183e220
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - planetData: {fileID: 11400000, guid: e39360258b8d3384fb671d4339fd56af, type: 2}
+  - planetNameText: {instanceID: 0}
+  - planetSpriteImage: {instanceID: 0}
+  - resourceAmountText: {instanceID: 0}
+  - purchaseButton: {instanceID: 0}
+  - upgradeMiningSpeedButton: {instanceID: 0}
+  - miningSpeedText: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
